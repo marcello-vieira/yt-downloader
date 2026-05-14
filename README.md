@@ -34,7 +34,8 @@ Caso não tenha algum deles instalado, veja a seção:
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/yt-downloader.git
+git clone 
+https://github.com/marcello-vieira/yt-downloader.git 
 ```
 
 Entre na pasta do projeto:
