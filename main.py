@@ -22,7 +22,7 @@ def painel():
 
 
 def baixar_video():
-    print("\n[DOWNLOAD]")
+    print("\n[DOWNLOAD - VIDEO]")
     link = input("Link do vídeo: ").strip()
 
     if not link:
@@ -32,6 +32,28 @@ def baixar_video():
     print("\nBaixando... aguarde.\n")
     subprocess.run(['yt-dlp', link])
     print("\nDownload concluído!\n")
+
+
+def baixar_audio():
+    print("\n[DOWNLOAD - AUDIO]")
+    link = input("Link do vídeo: ").strip()
+
+    if not link:
+        print("O link está vazio, cancelando...\n")
+        return False
+
+    print('baixando o áudio, aguarde...')
+    try:
+        subprocess.run([
+            'yt-dlp',
+            '--extract-audio',
+            '--audio-format', 'mp3',
+            '--audio-quality', '0',
+            link
+            ])
+
+    except Exception as erro:
+        print(f'Houve um erro inesperado: {erro}')
 
 
 while True:
