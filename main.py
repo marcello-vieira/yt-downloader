@@ -1,6 +1,8 @@
 import subprocess
 import os
 
+# https://www.youtube.com/watch?v=VjDg2txbbik
+
 
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -11,7 +13,8 @@ def painel():
     print("       YT-DOWNLOADER v1.0")
     print("=" * 40)
     print("[1] Baixar vídeo")
-    print("[2] Sair")
+    print("[2] Baixar áudio")
+    print("[3] Sair")
     print("-" * 40)
 
     try:
@@ -22,6 +25,7 @@ def painel():
 
 
 def baixar_video():
+    limpar_tela()
     print("\n[DOWNLOAD - VIDEO]")
     link = input("Link do vídeo: ").strip()
 
@@ -29,12 +33,24 @@ def baixar_video():
         print("O link está vazio, cancelando...\n")
         return False
 
-    print("\nBaixando... aguarde.\n")
-    subprocess.run(['yt-dlp', link])
-    print("\nDownload concluído!\n")
+    print("processando...")
+
+    titulo = subprocess.check_output([
+        'yt-dlp',
+        '--get-title',
+        link], text=True).strip()
+
+    print(f"obtido: {titulo}\nfazendo o download do vídeo.")
+
+    try:
+        subprocess.run(['yt-dlp', link])
+        print("\nDownload concluído!\n")
+    except Exception as erro:
+        print(f'Houve um erro durante o download :/\n{erro}')
 
 
 def baixar_audio():
+    limpar_tela()
     print("\n[DOWNLOAD - AUDIO]")
     link = input("Link do vídeo: ").strip()
 
@@ -53,7 +69,7 @@ def baixar_audio():
             ])
 
     except Exception as erro:
-        print(f'Houve um erro inesperado: {erro}')
+        print(f'Houve um erro ao extrair o áudio :/\n{erro}')
 
 
 while True:
@@ -64,7 +80,11 @@ while True:
         input("Pressione ENTER para continuar...")
         limpar_tela()
     elif opcao == 2:
-        print("\nAté mais, obrigado por usar o programa!!!\n")
+        baixar_audio()
+        input("Pressione ENTER para continuar...")
+        limpar_tela()
+    elif opcao == 3:
+        print("\nAté mais, obrigado por usar o programa!\n")
         break
     else:
         print("\nOpção inválida! Tente de novo.\n")
