@@ -49,7 +49,7 @@ crie um ambiente virtual
 python3 -m venv .venv
 ```
 
-ative o ambiente virtual
+ative o ambiente virtual 👇️
 
 ### Linux / macOS
 ```bash
@@ -62,7 +62,7 @@ source .venv/bin/activate
 .venv\Scripts\activate
 ```
 
-instale as dependências
+em seguida, instale as dependências
 
 ```bash
 pip install -r requirements.txt
@@ -113,6 +113,7 @@ Depois:
 ## 🚧 Status do projeto
 
 Este projeto ainda está no início e foi criado com o objetivo de praticar e aprender Python 😄
+
 Novas funcionalidades e melhorias serão adicionadas aos poucos conforme eu evoluo como desenvolvedor 👀
 
 ---
