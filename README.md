@@ -16,6 +16,7 @@ Para que possa ser executado sem problemas, você precisa ter instalado:
 
 - Python 3+
 - yt-dlp
+- Outras dependências listadas em `requirements.txt`
 
 ### Verifique as versões instaladas
 
@@ -31,39 +32,62 @@ Caso não tenha algum deles instalado, veja a seção:
 
 ## Instalação
 
-Clone o repositório:
+clone o repositório:
 
 ```bash
-git clone 
-https://github.com/marcello-vieira/yt-downloader.git 
+git clone https://github.com/marcello-vieira/yt-downloader.git
 ```
 
-Entre na pasta do projeto:
+entre na pasta do projeto:
 
 ```bash
 cd yt-downloader
 ```
+crie um ambiente virtual
 
-Execute o programa:
+```bash
+python3 -m venv .venv
+```
+
+ative o ambiente virtual
+
+### Linux / macOS
+```bash
+source .venv/bin/activate
+```
+
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+execute o programa:
 
 ```bash
 python3 main.py
 ```
-E seja feliz baixando seus vídeos :)
+Seja feliz baixando seus vídeos :)
 
 ---
 
 ## 🛠 Instalação das dependências
 
 ### Python
-
-Baixe a versão mais recente no site oficial:
+Caso você ainda não tenha o Python instalado, baixe a versão mais recente no site oficial:
 
 [Python.org Downloads](https://www.python.org/downloads/)
 
 ---
 
 ### yt-dlp
+Para instalar o yt-dlp no seu sistema, siga estes passos:
 
 ### Linux / macOS
 
@@ -88,9 +112,8 @@ Depois:
 
 ## 🚧 Status do projeto
 
-Este projeto ainda está no início e foi criado com o objetivo de praticar Python.
-
-👀 Novas funcionalidades e melhorias serão adicionadas aos poucos conforme eu evoluo como desenvolvedor 😄
+Este projeto ainda está no início e foi criado com o objetivo de praticar e aprender Python 😄
+Novas funcionalidades e melhorias serão adicionadas aos poucos conforme eu evoluo como desenvolvedor 👀
 
 ---
 

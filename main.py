@@ -1,92 +1,76 @@
-import subprocess
 import os
-
-# https://www.youtube.com/watch?v=VjDg2txbbik
-
-
-def limpar_tela():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def painel():
-    print("=" * 40)
-    print("       YT-DOWNLOADER v1.0")
-    print("=" * 40)
-    print("[1] Baixar vídeo")
-    print("[2] Baixar áudio")
-    print("[3] Sair")
-    print("-" * 40)
-
-    try:
-        resposta = int(input("Escolha: "))
-        return resposta
-    except ValueError:
-        return 0
+import subprocess
+from rich import print
+from rich.panel import Panel
+from rich.console import Console
+from rich.prompt import Prompt
 
 
-def baixar_video():
-    limpar_tela()
-    print("\n[DOWNLOAD - VIDEO]")
-    link = input("Link do vídeo: ").strip()
+class App:
+    def __init__(self):
+        self.console = Console()
+        self.looping_principal()
 
-    if not link:
-        print("O link está vazio, cancelando...\n")
-        return False
+    def limpar_tela(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
 
-    print("processando...")
+    def menu(self):
+        self.conteudo = "[1] baixar video\n[2] baixar audio\n[3] sair"
+        self.console.print(Panel(
+            self.conteudo,
+            title="[cyan]YT Downloader[/]",
+            border_style="white",
+            width=30
+            ))
 
-    titulo = subprocess.check_output([
-        'yt-dlp',
-        '--get-title',
-        link], text=True).strip()
+    def baixar(self, modo_audio=False):
+        self.link = Prompt.ask("[bold yellow]Link do video[/]").strip()
+        if not self.link:
+            self.limpar_tela()
+            print("[red]O link ficou vazio, tente de novo[/]")
+            return
 
-    print(f"obtido: {titulo}\nfazendo o download do vídeo.")
+        self.comando = ['yt-dlp']
+        if modo_audio:
+            self.comando += [
+                '--extract-audio',
+                '--audio-format',
+                'mp3',
+                '--audio-quality',
+                '0']
+        self.comando.append(self.link)
+        try:
+            print("[green]iniciando...[/]")
+            subprocess.run(self.comando)
+            self.limpar_tela()
+            print("[green]concluído! verifique na pasta do projeto :)[/]")
+        except Exception as erro:
+            print("[bold red]Houve um erro durante o download :/[/]")
 
-    try:
-        subprocess.run(['yt-dlp', link])
-        print("\nDownload concluído!\n")
-    except Exception as erro:
-        print(f'Houve um erro durante o download :/\n{erro}')
+        input("[Aperte Enter para retornar]")
+
+    def looping_principal(self):
+        while True:
+            self.limpar_tela()
+            self.menu()
+            self.escolha = Prompt.ask(
+                "[bold green]Sua escolha[/]")
+
+            match self.escolha:
+                case '1':
+                    self.baixar(modo_audio=False)
+                case '2':
+                    self.baixar(modo_audio=True)
+                case '3':
+                    # self.limpar_tela()
+                    print("[cyan]Programa encerrado, até mais![/]")
+                    break
+
+                case _:
+                    print("[red]escolha algo válido.[/]")
+                    input("Aperte [Enter] para tentar de novo")
+                    continue
 
 
-def baixar_audio():
-    limpar_tela()
-    print("\n[DOWNLOAD - AUDIO]")
-    link = input("Link do vídeo: ").strip()
-
-    if not link:
-        print("O link está vazio, cancelando...\n")
-        return False
-
-    print('baixando o áudio, aguarde...')
-    try:
-        subprocess.run([
-            'yt-dlp',
-            '--extract-audio',
-            '--audio-format', 'mp3',
-            '--audio-quality', '0',
-            link
-            ])
-
-    except Exception as erro:
-        print(f'Houve um erro ao extrair o áudio :/\n{erro}')
-
-
-while True:
-    opcao = painel()
-
-    if opcao == 1:
-        baixar_video()
-        input("Pressione ENTER para continuar...")
-        limpar_tela()
-    elif opcao == 2:
-        baixar_audio()
-        input("Pressione ENTER para continuar...")
-        limpar_tela()
-    elif opcao == 3:
-        print("\nAté mais, obrigado por usar o programa!\n")
-        break
-    else:
-        print("\nOpção inválida! Tente de novo.\n")
-        input("Pressione ENTER...")
-        limpar_tela()
+if __name__ == '__main__':
+    App()
