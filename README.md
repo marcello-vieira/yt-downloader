@@ -1,10 +1,10 @@
 # 🎬 YT Downloader
 
-Um baixador de vídeos simples, funcional e feito em Python utilizando o yt-dlp.
+Um baixador de vídeos simples, mas funcional e feito em Python utilizando o yt-dlp.
 
 ## Funcionalidades
 
-- Baixa vídeos do YouTube a ferramenta yt-dlp
+- Baixa vídeos do YouTube utilizando a ferramenta yt-dlp
 - Menu interativo no terminal
 - Loop contínuo (baixe vários vídeos sem precisar reiniciar o programa)
 
