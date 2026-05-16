@@ -14,7 +14,7 @@ Um baixador de vídeos simples, mas funcional e feito em Python utilizando o yt-
 
 Para que possa ser executado sem problemas, você precisa ter instalado:
 
-- Python 3+
+- Python 3.10+ (recomenda-se o mais atualizado possível)
 - yt-dlp
 - Outras dependências listadas em `requirements.txt`
 
