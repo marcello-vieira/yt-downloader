@@ -71,8 +71,14 @@ pip install -r requirements.txt
 execute o programa:
 
 ```bash
-python3 main.py
+python3 .
 ```
+ou
+
+```bash
+python3 __main__.py
+```
+
 Seja feliz baixando seus vídeos :)
 
 ---
